@@ -1,0 +1,16 @@
+.e-content .e-item {
+    font-size: 12px;
+    padding: 10px;
+    text-align: justify;
+}
+.content-title {  
+    height: 50px;
+    display: table;
+    margin: 0 auto;
+}
+.cnt-text {
+    vertical-align: middle;
+    display: table-cell;
+    font-size: 18px;
+    font-weight: 600;
+}
