@@ -8,17 +8,12 @@ let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
 // initialize File Manager component and add custom item to contextmenu
 let filemanagerInstance: FileManager = new FileManager({
     ajaxSettings: {
-            url: hostUrl + 'api/FileManager/FileOperations',
-            getImageUrl: hostUrl + 'api/FileManager/GetImage',
-            uploadUrl: hostUrl + 'api/FileManager/Upload',
-            downloadUrl: hostUrl + 'api/FileManager/Download'
+            url: hostUrl + 'api/FileManagerAccess/FileOperations',
+            getImageUrl: hostUrl + 'api/FileManagerAccess/GetImage',
+            uploadUrl: hostUrl + 'api/FileManagerAccess/Upload',
+            downloadUrl: hostUrl + 'api/FileManagerAccess/Download'
     },
-    view: 'Details',
-    beforeSend: function (args) {
-        args.ajaxSettings.beforeSend = function (args: any) {
-        args.httpRequest.setRequestHeader('Authorization', 'Access control');
-        };
-    },
+    view: 'Details'
 });
 
 // render initialized FileManager
