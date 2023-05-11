@@ -37,7 +37,7 @@ System.config({
     }
 });
 
-System.import('app.ts').catch(console.error.bind(console)).then(function () {
+System.import('index.ts').catch(console.error.bind(console)).then(function () {
     document.getElementById('loader').style.display = "none";
     document.getElementById('container').style.visibility = "visible";
 });
