@@ -109,7 +109,7 @@ Import the File Manager and its dependent component styles as given below in `st
 
 Now, you can start initializing the Essential JS 2 File Manager component in your application. To get started, add a HTML `<div>` element with id attribute value `filemanager` to your `index.html`.
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 
