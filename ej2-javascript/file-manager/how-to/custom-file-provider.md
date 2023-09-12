@@ -1,15 +1,15 @@
 ﻿---
 layout: post
-title:  Steps to implement own service provider in ##Platform_Name## File manager control | Syncfusion
-description: Learn here all about steps to implement own service provider in Syncfusion ##Platform_Name## File manager control of Syncfusion Essential JS 2 and more.
+title:  Implement own service provider in ##Platform_Name## File manager control | Syncfusion
+description: Learn here all about implementation own service provider in Syncfusion ##Platform_Name## File manager control of Syncfusion Essential JS 2 and more.
 platform: ej2-javascript
-control: Steps to implement own service provider
+control: Implement own service provider
 publishingplatform: ##Platform_Name##
 documentation: ug
 domainurl: ##DomainURL##
 ---
 
-# Create the custom File-provider using NodeJS
+# Create the custom file-provider using NodeJS
 
 Here we manipulate the Azure Blob Storage to supply the necessary data for the File Manager. We achieve this by utilizing NodeJS to fetch the required data from the Azure blob storage.
 
@@ -43,7 +43,7 @@ NodeJS acts as the bridge between the File Manager component and Azure Blob Stor
 
 Azure Blob Storage is a cloud-based object storage service provided by Microsoft Azure. It is designed to store and manage unstructured data, also known as "blobs" in the cloud. Blobs can be any type of data, such as images, videos, documents, backups, logs, and more.
 
-#### Key Concepts of Azure Blob Storage
+#### Key concepts of Azure Blob Storage
 
 **Containers:** In Azure Blob Storage, data is organized into containers. Containers are logical units that can hold one or more blobs. Think of them as directories or folders that help organize the data.
 
@@ -65,9 +65,9 @@ cd file-provider
 
 ```
 
-#### Initialize the Node.js project
+#### Initialize the NodeJS project
 
-Run the following command to initialize a new Node.js project. This will create a package.json file, which will keep track of your project's dependencies and metadata:
+Run the following command to initialize a new NodeJS project. This will create a package.json file, which will keep track of your project's dependencies and metadata:
 
 ```ts
 
@@ -79,7 +79,7 @@ The command will prompt you to enter various information about your project, suc
 
 #### Create the main file
 
-Create an entry point file for your application. This is where your Node.js code will start running. By convention, it is often named index.js:
+Create an entry point file for your application. This is where your NodeJS code will start running. By convention, it is often named index.js:
 
 ```ts
 
@@ -106,9 +106,9 @@ npm install express
 
 ```
 
-#### Write your initial Node.js code
+#### Write your initial NodeJS code
 
-Open your text editor or integrated development environment (IDE) and start writing your Node.js code in the index.js file. This file will serve as the entry point of your application. For example, you can create a simple Express.js server:
+Open your text editor or integrated development environment (IDE) and start writing your NodeJS code in the index.js file. This file will serve as the entry point of your application. For example, you can create a simple Express.js server:
 
 ```ts
 
@@ -117,7 +117,7 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => { 
-  res.send('Hello, Node.js!'); 
+  res.send('Hello, NodeJS!'); 
 });
 
 app.listen(port, () => { 
@@ -126,9 +126,9 @@ app.listen(port, () => {
 
 ```
 
-#### Run your Node.js application
+#### Run your NodeJS application
 
-To start your Node.js application, simply run the following command in your terminal, pointing to the entry point file:
+To start your NodeJS application, simply run the following command in your terminal, pointing to the entry point file:
 
 ```ts
 
@@ -168,7 +168,7 @@ const multerConfig = {
 
 ```
 
-### Get Container client
+### Get container client
 
 We need to first get the BlobServiceClient. By using the connection string, we can obtain the BlobServiceClient. So, format the connection string as shown below.
 
@@ -187,11 +187,11 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
 
 ```
 
-### File Actions
+### File actions
 
 Need to provide the following action to creating a new folder, copying and moving of files or folders, deleting, uploading, and downloading the files or folders in the file system
 
-#### Read Action
+#### Read action
 
 - Create the **app.post** method with URL '/'.
 
@@ -246,6 +246,7 @@ async function getDateModified(directoryPath) {
 }
 
 ``` 
+
 - Utilize the directory name and **listBlobsByHierarchy** in the **hasChildren** method to obtain the haschildren value. Return the true if prefix is available.
 
 ```ts
@@ -260,6 +261,7 @@ async function hasChildren(directoryPath) {
 }
 
 ```
+
 - Here is the code,
 
 ```ts
@@ -296,6 +298,7 @@ async function getFiles(req) {
 }
 
 ```
+
 - Once the **getFiles** function has returned the files and folders, the response must be set. Two parameters are needed for a response.
   - Cwd
   - Files
@@ -304,7 +307,7 @@ async function getFiles(req) {
 
 - Created the **cwdFiles** object, assign the name if the request data has the name else assign the default **directoryName**.
 
-#### Get Image
+#### Get image
 
 - Create the **app.get** method with URL **'/GetImage'**.
 
@@ -341,7 +344,7 @@ app.get('/GetImage', async function (req, res) {
   - File download
   - Directory Download
   
-##### File(single) Download
+#### File(single) download
 
 - Get the exact file path of file by adding like this **directoryName + downloadObj.path + downloadObj.names[0].** For example: 'Files'+'/'+'jack.jpg'.
 
@@ -359,7 +362,7 @@ res.setHeader('Content-Length', downloadResponse.contentLength);
 
 ```
 
-##### Directory (multiple and single) download
+#### Directory (multiple and single) download
 
 - Create the archive file to download the multiple Files, Folders and single folders.
 
@@ -467,7 +470,7 @@ const multerConfig = {
   - Keep Both
   - Replace
 
-##### Save
+#### Save
 
 - Under this case create the **getBlockBlobClient** with the **req.body.filename**.
 - If the blob does not exist, then upload the data to that blob.
@@ -497,13 +500,13 @@ if (req.body.action === 'save') {
 
 ```
 
-##### Keep Both
+#### Keep both
 
 - If the action is keep both, then create the new file name. Using this new file name create the **getBlockBlobClient.** Again, check if the blob  exists or not.
 - If the blob does not exist, then upload the data to the blob.
 - If the blob exists, then change the name again.
 
-##### Replace
+#### Replace
 
 - If the action is 'replace', then upload the data to that blob.
 - Here is the complete code of the upload action.
@@ -647,7 +650,7 @@ if (typeof req.body !== 'undefined' && req.body.action === 'rename') {
   - File Rename.
   - Folder Rename
 
-##### File Rename
+#### File rename
 
 - We need to get the source and target file instance.
 - Then check if the target file instance already exists or not.
@@ -664,7 +667,7 @@ await sourceBlobClient.delete();
 
 - If the file exists, then send the error message as response.
 
-##### Folder Rename
+#### Folder rename
 
 - For Folder rename, check the existence of folder using the **listBlobsFlat** method.
 - If the folder exists send the error message.
@@ -776,11 +779,11 @@ if (typeof req.body !== 'undefined' && req.body.action === 'delete') {
 - Use the for loop over **req.body.data** to delete the multiple and single files or folders.
 - We can separate File and folder delete action by using **req.body.data[i].isFile** this Boolean value
 
-##### File Delete
+#### File delete
 
 - For delete the file directly get the file instance and delete the file. Before deleting the file get the required fields.
 
-##### Folder Delete
+#### Folder delete
 
 - To delete the folder, we need to get all files inside that folder and delete all those files.
 - Handle the null exception if file or folder is not available.
@@ -860,7 +863,7 @@ if (typeof req.body !== 'undefined' && req.body.action === 'details') {
   - File or folder details (single/Multiple)
 - We can separate the Overall details and File or folder details by this condition **"req.body.names.length == 0 && req.body.data != 0)"** 
 
-##### Overall details
+#### Overall details
 
 - Create the size and **lastUpdated** variables to store the overall blobs size and last date modified.
 - We can get all the blobs from the given path using **listBlobsFlat**  method.
@@ -898,7 +901,7 @@ if (req.body.names.length == 0 && req.body.data != 0) {
 
 ```
 
-##### File and Folders details
+#### File and folder details
 
 - To get the file and folder details, iterate the **req.body.names** to get the details of files and folders.
 - If the data is file, then get the file instance and get the properties using the **getProperties** method. And set the required properties.
@@ -1026,7 +1029,7 @@ async function searchFiles(req, res) {
 
 ```
 
-#### Copy and Move
+#### Copy and move
 
 - Under the post method with this URL '/' add the following code to call the **copyAndMoveFile**  method.
 
@@ -1043,7 +1046,7 @@ if (typeof req.body !== 'undefined' && (req.body.action === 'copy' || req.body.a
   - File copy and move.
 - Create the **isRename** variable to store the is request is rename or not.
 
-##### Directory copy and move
+#### Directory copy and move
 
 - If the **isRename** is false then check the existence of the folders, and if folder is existing, then send the error message.
 - If **isRename** is true, then don’t check the existence of the folder.
@@ -1114,7 +1117,7 @@ if (!isExist) {
 
 ```
 
-##### File copy and move
+#### File copy and move
 
 - If the **isRename** is false then check the existence of the files, and if folder exists, then send the error message.
 - If **isRename** is true, then don’t check the existence of the files.
