@@ -344,7 +344,7 @@ app.get('/GetImage', async function (req, res) {
   - File download
   - Directory Download
   
-#### File(single) download
+##### File(single) download
 
 - Get the exact file path of file by adding like this **directoryName + downloadObj.path + downloadObj.names[0].** For example: 'Files'+'/'+'jack.jpg'.
 
@@ -362,7 +362,7 @@ res.setHeader('Content-Length', downloadResponse.contentLength);
 
 ```
 
-#### Directory (multiple and single) download
+##### Directory (multiple and single) download
 
 - Create the archive file to download the multiple Files, Folders and single folders.
 
@@ -500,13 +500,13 @@ if (req.body.action === 'save') {
 
 ```
 
-#### Keep both
+##### Keep both
 
 - If the action is keep both, then create the new file name. Using this new file name create the **getBlockBlobClient.** Again, check if the blob  exists or not.
 - If the blob does not exist, then upload the data to the blob.
 - If the blob exists, then change the name again.
 
-#### Replace
+##### Replace
 
 - If the action is 'replace', then upload the data to that blob.
 - Here is the complete code of the upload action.
@@ -650,7 +650,7 @@ if (typeof req.body !== 'undefined' && req.body.action === 'rename') {
   - File Rename.
   - Folder Rename
 
-#### File rename
+##### File rename
 
 - We need to get the source and target file instance.
 - Then check if the target file instance already exists or not.
@@ -667,7 +667,7 @@ await sourceBlobClient.delete();
 
 - If the file exists, then send the error message as response.
 
-#### Folder rename
+##### Folder rename
 
 - For Folder rename, check the existence of folder using the **listBlobsFlat** method.
 - If the folder exists send the error message.
@@ -779,11 +779,11 @@ if (typeof req.body !== 'undefined' && req.body.action === 'delete') {
 - Use the for loop over **req.body.data** to delete the multiple and single files or folders.
 - We can separate File and folder delete action by using **req.body.data[i].isFile** this Boolean value
 
-#### File delete
+##### File delete
 
 - For delete the file directly get the file instance and delete the file. Before deleting the file get the required fields.
 
-#### Folder delete
+##### Folder delete
 
 - To delete the folder, we need to get all files inside that folder and delete all those files.
 - Handle the null exception if file or folder is not available.
@@ -863,7 +863,7 @@ if (typeof req.body !== 'undefined' && req.body.action === 'details') {
   - File or folder details (single/Multiple)
 - We can separate the Overall details and File or folder details by this condition **"req.body.names.length == 0 && req.body.data != 0)"** 
 
-#### Overall details
+##### Overall details
 
 - Create the size and **lastUpdated** variables to store the overall blobs size and last date modified.
 - We can get all the blobs from the given path using **listBlobsFlat**  method.
@@ -901,7 +901,7 @@ if (req.body.names.length == 0 && req.body.data != 0) {
 
 ```
 
-#### File and folder details
+##### File and folder details
 
 - To get the file and folder details, iterate the **req.body.names** to get the details of files and folders.
 - If the data is file, then get the file instance and get the properties using the **getProperties** method. And set the required properties.
@@ -1046,7 +1046,7 @@ if (typeof req.body !== 'undefined' && (req.body.action === 'copy' || req.body.a
   - File copy and move.
 - Create the **isRename** variable to store the is request is rename or not.
 
-#### Directory copy and move
+##### Directory copy and move
 
 - If the **isRename** is false then check the existence of the folders, and if folder is existing, then send the error message.
 - If **isRename** is true, then don’t check the existence of the folder.
@@ -1117,7 +1117,7 @@ if (!isExist) {
 
 ```
 
-#### File copy and move
+##### File copy and move
 
 - If the **isRename** is false then check the existence of the files, and if folder exists, then send the error message.
 - If **isRename** is true, then don’t check the existence of the files.
