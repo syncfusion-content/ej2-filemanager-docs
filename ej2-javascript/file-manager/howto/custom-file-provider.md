@@ -330,7 +330,7 @@ app.get('/GetImage', async function (req, res) {
 
 - The req.query.path contains the exact path of the images. For example: "/Jack.png". So, add the directoryName with req.query.path to get the blob client.
 
-- download the blob (image) from Azure Blob Storage using the blobClient and stores the result in the downloadResponse variable.
+- Download the blob (image) from Azure Blob Storage using the blobClient and stores the result in the downloadResponse variable.
 
 - Pipe the readableStreamBody from the downloadResponse to the res (response) object. It means the image data will be streamed from the Azure Blob Storage directly to the client's browser when the image URL is accessed.
 
