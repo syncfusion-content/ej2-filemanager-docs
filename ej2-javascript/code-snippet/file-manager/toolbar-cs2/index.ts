@@ -1,10 +1,12 @@
 
 
-import { FileManager, Toolbar, NavigationPane, DetailsView, ToolbarClickEventArgs } from '@syncfusion/ej2-filemanager';
+import { FileManager, Toolbar, NavigationPane, DetailsView } from '@syncfusion/ej2-filemanager';
+import { CheckBox, ChangeEventArgs } from '@syncfusion/ej2-buttons';
 
 FileManager.Inject(Toolbar, NavigationPane, DetailsView)
 
 let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
+var buttonTemplate: string = '<input id="checkbox" type="checkbox"/>';
 // initialize File Manager component
 let filemanagerInstance: FileManager = new FileManager({
     ajaxSettings: {
@@ -14,28 +16,36 @@ let filemanagerInstance: FileManager = new FileManager({
         downloadUrl: hostUrl + 'api/FileManager/Download'
     },
     //Custom item added along with default item
-    toolbarSettings:{items: ['NewFolder', 'Custom', 'Upload', 'Delete', 'Download', 'Rename', 'SortBy', 'Refresh', 'Selection', 'View', 'Details']},
-    toolbarClick:toolbarClick,
-    toolbarCreate: toolbarCreate
+    toolbarItems: [{ name: 'NewFolder' }, 
+    { name: 'Upload' },   
+    { name: 'SortBy' },
+    { name: 'Refresh' },
+    { name: 'Cut' },
+    { name: 'Copy' },
+    { name: 'Paste' },
+    { name: 'Delete' },
+    { name: 'Download' },
+    { name: 'Rename' },
+    { template: buttonTemplate, name: 'Select' },
+    { name: 'Selection' },
+    { name: 'View' },
+    { name: 'Details' }]
 });
-
-// event for custom toolbar item
-function toolbarClick(args: ToolbarClickEventArgs) {
-    if (args.item.text === 'Custom') {
-        alert('You have clicked custom toolbar item')
-    }
-}
-
-// Icon added to custom toolbar item
- function toolbarCreate(args: ToolbarCreateEventArgs) {
-        for(let i: number = 0;i<args.items.length;i++) {
-            if(args.items[i].id === this.element.id +'_tb_custom') {
-                args.items[i].prefixIcon= 'e-icons e-fe-tick';
-            }
-        }
-}
 
 // render initialized FileManager
 filemanagerInstance.appendTo('#filemanager');
 
+// Render Checkbox in template
+var checkbox: CheckBox = new CheckBox({ label: 'Select All', checked: false, change: onChange },'#checkbox');
 
+// on checkbox change select all or clear selection
+function onChange(args: ChangeEventArgs): void {
+    if (args.checked) {
+        filemanagerInstance.selectAll(); 
+        checkbox.label = 'Unselect All';
+    }
+    else {
+        filemanagerInstance.clearSelection();
+        checkbox.label = 'Select All';
+    }
+}
