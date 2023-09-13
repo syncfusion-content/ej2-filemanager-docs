@@ -11,9 +11,11 @@ domainurl: ##DomainURL##
 
 # Adding custom item to toolbar in ##Platform_Name## File manager control
 
-You can change the items in the toolbar using the [toolbarItems](../../api/file-manager/#toolbarItems) API. To show both the default and customized items, you need to assign a name to them. You can also modify the default items by changing properties like **tooltipText, iconCss, Text, suffixIcon** and more.
+The toolbar items can be customized using the [toolbarSettings](../../api/file-manager/#toolbarSettings) API and [toolbarClick](../../api/file-manager/#toolbarClick) events.
 
-For instance, here's an example of how to add a custom checkbox to the toolbar using the **template** property.
+The following example shows adding a custom item in the toolbar.
+
+The new toolbar button is added using [toolbarSettings](../../api/file-manager/#toolbarSettings). The [toolbarClick](../../api/file-manager/#toolbarClick) event is used to add an event handler to the new toolbar button.
 
 {% if page.publishingplatform == "typescript" %}
 
