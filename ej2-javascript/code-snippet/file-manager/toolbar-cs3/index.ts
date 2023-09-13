@@ -5,7 +5,6 @@ import { FileManager, Toolbar, NavigationPane, DetailsView, ToolbarClickEventArg
 FileManager.Inject(Toolbar, NavigationPane, DetailsView)
 
 let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
-
 // initialize File Manager component
 let filemanagerInstance: FileManager = new FileManager({
     ajaxSettings: {
@@ -16,12 +15,8 @@ let filemanagerInstance: FileManager = new FileManager({
     },
     //Custom item added along with default item
     toolbarSettings:{items: ['NewFolder', 'Custom', 'Upload', 'Delete', 'Download', 'Rename', 'SortBy', 'Refresh', 'Selection', 'View', 'Details']},
-    toolbarClick:toolbarClick,
-    toolbarCreate: toolbarCreate
+    toolbarClick:toolbarClick
 });
-
-// render initialized FileManager
-filemanagerInstance.appendTo('#filemanager');
 
 // event for custom toolbar item
 function toolbarClick(args: ToolbarClickEventArgs) {
@@ -30,11 +25,5 @@ function toolbarClick(args: ToolbarClickEventArgs) {
     }
 }
 
-// Icon added to custom toolbar item
-function toolbarCreate(args: ToolbarCreateEventArgs) {
-    for(let i: number = 0;i<args.items.length;i++) {
-        if(args.items[i].id === this.element.id +'_tb_custom') {
-            args.items[i].prefixIcon= 'e-icons e-fe-tick';
-        }
-    }
-}
+// render initialized FileManager
+filemanagerInstance.appendTo('#filemanager');

@@ -17,9 +17,9 @@ var filemanagerInstance = new ej.filemanager.FileManager({
 
 // event for custom toolbar item
 function toolbarClick(args) {
-if (args.item.text === 'Custom') {
-    alert('You have clicked custom toolbar item')
-}
+    if (args.item.text === 'Custom') {
+        alert('You have clicked custom toolbar item')
+    }
 }
 // Icon added to custom toolbar item
 function toolbarCreate(args) {
