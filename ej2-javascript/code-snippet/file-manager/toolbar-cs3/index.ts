@@ -27,3 +27,4 @@ function toolbarClick(args: ToolbarClickEventArgs) {
 
 // render initialized FileManager
 filemanagerInstance.appendTo('#filemanager');
+
