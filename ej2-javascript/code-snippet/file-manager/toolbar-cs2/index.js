@@ -10,7 +10,7 @@ var filemanagerInstance = new ej.filemanager.FileManager({
         downloadUrl: hostUrl + 'api/FileManager/Download'
     },
     //Custom item added along with default item
-    toolbarItems: [{ name: 'NewFolder' }, 
+    toolbarItems: [{ text: 'Create folder' , name: 'NewFolder', prefixIcon: 'e-plus', tooltipText: 'Create folder' }, 
     { name: 'Upload' },   
     { name: 'SortBy' },
     { name: 'Refresh' },
