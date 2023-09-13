@@ -6,7 +6,6 @@ import { CheckBox, ChangeEventArgs } from '@syncfusion/ej2-buttons';
 FileManager.Inject(Toolbar, NavigationPane, DetailsView)
 
 let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
-var buttonTemplate: string = '<input id="checkbox" type="checkbox"/>';
 // initialize File Manager component
 let filemanagerInstance: FileManager = new FileManager({
     ajaxSettings: {
@@ -26,7 +25,7 @@ let filemanagerInstance: FileManager = new FileManager({
     { name: 'Delete' },
     { name: 'Download' },
     { name: 'Rename' },
-    { template: buttonTemplate, name: 'Select' },
+    { template: '<input id="checkbox" type="checkbox"/>', name: 'Select' },
     { name: 'Selection' },
     { name: 'View' },
     { name: 'Details' }]

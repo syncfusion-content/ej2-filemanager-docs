@@ -1,7 +1,6 @@
 var hostUrl = 'https://ej2-aspcore-service.azurewebsites.net/';
 // inject feature modules of the file manager
 ej.filemanager.FileManager.Inject(ej.filemanager.DetailsView,ej.filemanager.Toolbar,ej.filemanager.NavigationPane);
-var buttonTemplate = '<input id="checkbox" type="checkbox"/>';
 // initialize File Manager component
 var filemanagerInstance = new ej.filemanager.FileManager({
     ajaxSettings: {
@@ -21,11 +20,11 @@ var filemanagerInstance = new ej.filemanager.FileManager({
     { name: 'Delete' },
     { name: 'Download' },
     { name: 'Rename' },
-    { template: buttonTemplate, name: 'Select' },
+    { template: '<input id="checkbox" type="checkbox"/>', name: 'Select' },
     { name: 'Selection' },
     { name: 'View' },
     { name: 'Details' }]
-});;
+});
 
 // render initialized File Manager
 filemanagerInstance.appendTo('#filemanager');
