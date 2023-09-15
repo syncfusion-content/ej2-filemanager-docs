@@ -176,6 +176,17 @@ The following table represents the contents of **data, cwd, and files** in the f
 |size|Number|-|File size|Yes|
 |type|String|-|File extension|Yes|
 |permission |AccessRules|-|File extension|Optional|
+|caseSensitive|Boolean|-|Defines search is case sensitive or not.|Optional|
+|action|String|read|Name of the file operation.|Optional|
+|names|String[]|-|Name list of the items to be downloaded.|Optional|
+|data|FileManagerDirectoryContent|-|Details of the download item.|Optional|
+|uploadFiles|`IList<IFormFile>`|-|File that are uploaded.|Optional|
+|newname|String|-|New name for the item.|Optional|
+|searchString|String|-|String to be searched in the directory.|Optional|
+|targetPath|String|-|Relative path where the items to be pasted are located.|Optional|
+|targetData|FileManagerDirectoryContent|-|Details of the copied item.|Optional|
+|renameFiles|String[]|-|Details of the renamed item.|Optional|
+
 
 The following table represents the AccessRule properties available for file and folder:
 
@@ -537,31 +548,7 @@ The following table represents the response parameters of *delete* operations.
 
 
 
-#### Details
-
-- Under the post method with this url ‘/’ add the following code to call the **getDetails** method.
-
-```ts
-if (typeof req.body !== 'undefined' && req.body.action === 'details') { 
-  await getDetails(req, res);
-}
-
-```
-
-- Need to handle two cases.
-  - Overall details.
-  - File or folder details (single/Multiple)
-- We can separate the Overall details and File or folder details by this condition **"req.body.names.length == 0 && req.body.data != 0)"** 
-
-##### Overall details
-
-- Create the size and **lastUpdated** variables to store the overall blobs size and last date modified.
-- We can get all the blobs from the given path using **listBlobsFlat**  method.
-- Add each blob’s size to the size variable to get the overall size.
-- Set **lastModified** value to the **lastUpdated** variable by comparing the previous one.
-- Create the object and set the required properties and send the response.
-
-### File and folder details
+### Details
 
 The following table represents the request parameters of *details* operations.
 
@@ -713,6 +700,7 @@ he following table represents the request parameters of *copy* operations.
 |names|String[] |-|List of files to be copied.|
 |targetPath|String|-|Relative path where the items to be pasted are located.|
 |data|FileManagerDirectoryContent|-|Details of the copied item.|
+|targetData|FileManagerDirectoryContent|-|Details of the copied item.|
 |renameFiles|String[]|-|Details of the renamed item.|
 
 *Example for request:*
@@ -791,3 +779,5 @@ The following table represents the response parameters of *copy* operations.
 Create the **isRename** variable to store the is request is rename or not. If the **isRename** is false then check the existence of the folders, and if folder is existing, then send the error message. If **isRename** is true, then don’t check the existence of the folder.
 
 To move or copy the folders you need to get all the blobs from that folder and create the new path for each blob and copy the data from the old path to the new path. To move or copy the files copy the data from the source blob client to target client. If the action is move then delete the old blob.
+
+> **Note:** To get the complete project, refer to this [link](https://github.com/SyncfusionExamples/filemanager-azure-nodejs-file-provider)
