@@ -137,7 +137,7 @@ The following table represents the request parameters of **read** operations.
     path: "/Videos/",
     showHiddenItems: false,
     data: [
-      {
+      0:{
         name:"Videos",
         size:0,
         dateModified:"2023-09-14T14:28:27.000Z",
@@ -204,7 +204,7 @@ The following table represents the AccessRule properties available for file and 
         type: "File Folder"
     },
     files:[
-        {
+        0:{
             dateCreated: "2023-09-14T11:16:57.000Z"
             dateModified: "2023-09-14T11:16:57.000Z"
             filterPath: "/Videos/"
@@ -259,7 +259,7 @@ The following table represents the request parameters of *download* operations.
   path: '/Downloads/Testing/',
   names: [ 'About.txt' ],
   data: [
-    {
+    0:{
       name: 'About.txt',
       type: '.txt',
       isFile: true,
@@ -302,7 +302,7 @@ The following table represents the request parameters of *Upload* operations.
   path: '/Pictures/',
   action: 'save',
   data: [
-    {
+    0:{
       name: 'Pictures',
       type: 'File Folder',
       isFile: true,
@@ -356,7 +356,7 @@ The following table represents the request parameters of *create* operations.
 
    action: "create",
     data: [
-        {
+        0:{
             filterPath: "/",
             hasChild: true,
             isFile: false,
@@ -388,7 +388,7 @@ The following table represents the response parameters of *create* operations.
 {
     cwd: null,
     files: [
-        {
+        0:{
             dateCreated: "2023-09-14T10:52:25.000Z",
             dateModified: "2023-09-14T10:52:25.000Z",
             filterPath: null,
@@ -422,7 +422,7 @@ The following table represents the request parameters of *rename* operations.
 {
     action: "rename",
     data: [
-        {
+        0:{
             dateCreated: "2023-09-14T10:41:17.000Z",
             filterPath: "/Pictures/Nature/",
             hasChild: false,
@@ -453,7 +453,7 @@ The following table represents the response parameters of *rename* operations.
 {
     cwd:null,
     files:[
-        {
+        0:{
             name:"seaview.jpg",
             size:95866,
             dateModified:"2023-09-14T11:16:57.000Z",
@@ -489,7 +489,7 @@ The following table represents the request parameters of *delete* operations.
     path: "/",
     names: ["bird.jpg"],
     data: [
-       {
+       0:{
           dateModified: "2023-09-14T09:12:53.000Z",
           filterPath: "/",
           hasChild: false,
@@ -521,7 +521,7 @@ The following table represents the response parameters of *delete* operations.
     details: null,
     error: null,
     files: [
-        {
+        0:{
           dateModified: "2023-09-14T09:12:53.000Z",
           filterPath: "/",
           hasChild: false,
@@ -580,7 +580,7 @@ The following table represents the request parameters of *details* operations.
     path: "/FileContents/",
     names: ["bird.jpg"],
     data: [
-      {
+      0:{
         dateModified: "2023-09-14T09:12:53.000Z",
         filterPath: "/",
         hasChild: false,
@@ -649,7 +649,7 @@ The following table represents the request parameters of *search* operations.
     showHiddenItems: false,
     caseSensitive: false,
     data: [
-      {
+      0:{
         filterPath: "/",
         hasChild: true,
         name: "asia",
