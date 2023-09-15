@@ -691,7 +691,7 @@ The following table represents the response parameters of *search* operations.
 
 ### Copy and move
 
-he following table represents the request parameters of *copy* operations.
+The following table represents the request parameters of *copy* operations.
 
 |Parameter|Type|Default|Explanation|
 |----|----|----|----|
