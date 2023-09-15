@@ -205,14 +205,14 @@ The following table represents the AccessRule properties available for file and 
     },
     files:[
         {
-            name:"Sample Work Sheet.xlsx",
-            size:6172,
-            dateModified:"2019-02-27T17:23:50.9651206+00:00",
-            dateCreated:"2019-02-27T17:36:15.8151955+00:00",
-            hasChild:false,
-            isFile:true,
-            type:".xlsx",
-            filterPath:"//Download//"
+            dateCreated: "2023-09-14T11:16:57.000Z"
+            dateModified: "2023-09-14T11:16:57.000Z"
+            filterPath: "/Videos/"
+            hasChild: false
+            isFile: true
+            name: "about.txt"
+            size: 29
+            type: ".txt"
         }
     ],
     error:null
