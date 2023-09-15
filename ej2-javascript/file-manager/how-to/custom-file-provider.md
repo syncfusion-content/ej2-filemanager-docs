@@ -106,9 +106,9 @@ const containerClient = blobServiceClient.getContainerClient(containerName);
 
 Need to provide the following action to creating a new folder, copying and moving of files or folders, deleting, uploading, and downloading the files or folders in the file system
 
-### Read action
+### Read
 
-- Specify the directory name that needs to be accessed.
+Specify the directory name that needs to be accessed.
 
 ```ts
 
@@ -116,8 +116,8 @@ const directoryName = 'Files';
 
 ```
 
-- Create the **app.post** method with URL **'/fileManager'**.
-- To identify the action by use this condition **req.body.action === 'read'**
+Create the **app.post** method with URL **'/fileManager'**.
+To identify the action by use this condition **req.body.action === 'read'**
 
 The following table represents the request parameters of **read** operations.
 
@@ -129,14 +129,29 @@ The following table represents the request parameters of **read** operations.
 |data|FileManagerDirectoryContent|-|Details about the current path (directory).|
 
 
-*Example:*
+*Example for request:*
 
 ```ts
 {
     action: "read",
-    path: "/",
+    path: "/Videos/",
     showHiddenItems: false,
-    data: []
+    data: [
+      {
+        name:"Videos",
+        size:0,
+        dateModified:"2023-09-14T14:28:27.000Z",
+        dateCreated: "2023-09-14T11:16:57.000Z",
+        hasChild:true,
+        isFile:false,
+        type:"Directory",
+        filterPath:"/",
+        _fm_icon: "e-fe-folder",
+        _fm_iconClass: "e-fe-folder",
+        _fm_id: "fe_tree_0",
+        _fm_modified: "September 14, 2023 19:58"
+      }
+    ]
 }
 ```
 
@@ -182,14 +197,11 @@ The following table represents the AccessRule properties available for file and 
 {
     cwd:
     {
-        name:"Download",
-        size:0,
-        dateModified:"2019-02-28T03:48:19.8319708+00:00",
-        dateCreated:"2019-02-27T17:36:15.812193+00:00",
-        hasChild:false,
-        isFile:false,
-        type:"",
-        filterPath:"//Download//"
+        filterPath: "/",
+        hasChild: true,
+        name: "Videos",
+        size: 0,
+        type: "File Folder"
     },
     files:[
         {
@@ -238,7 +250,7 @@ The following table represents the request parameters of *download* operations.
 |names|String[]|-|Name list of the items to be downloaded.|
 |data|FileManagerDirectoryContent|-|Details of the download item.|
 
-*Example:*
+*Example for request:*
 
 ```ts
 
@@ -258,8 +270,7 @@ The following table represents the request parameters of *download* operations.
       _fm_created: null,
       _fm_modified: 'September 14, 2023 11:33',
       _fm_iconClass: 'e-fe-txt',
-      _fm_icon: 'e-fe-txt',
-      _fm_htmlAttr: [Object]
+      _fm_icon: 'e-fe-txt'
     }
   ]
 }
@@ -274,7 +285,7 @@ Create the archive file to download the multiple Files, Folders and single folde
 
 ### Upload
 
-Create the **app.post** method with URL ‘**/Upload**.
+Create the **app.post** method with URL ‘**/fileManager/Upload**.
 
 The following table represents the request parameters of *Upload* operations.
 
@@ -284,7 +295,7 @@ The following table represents the request parameters of *Upload* operations.
 |path|String|-|Relative path to the location where the file has to be uploaded.|
 |uploadFiles|`IList<IFormFile>`|-|File that are uploaded.|
 
-*Example:*
+*Example for request:*
 ```ts
 
 {
@@ -298,7 +309,7 @@ The following table represents the request parameters of *Upload* operations.
       size: 0,
       dateModified: '2023-09-14T06:03:52.000Z',
       hasChild: true,
-      filterPath: '/',      
+      filterPath: '',      
       _fm_id: 'fe_tree_1',
     }
   ],
@@ -307,8 +318,8 @@ The following table represents the request parameters of *Upload* operations.
 
 ```
 
-- Multer is a popular middleware used to handle file uploads in Express-based web applications.
-- Create the Multer config to store the upload files in buffer.
+Multer is a popular middleware used to handle file uploads in Express-based web applications.
+Create the Multer config to store the upload files in buffer.
 
 ```ts
 
@@ -318,7 +329,7 @@ const multerConfig = {
 
 ```
 
-We can handle the 3 cases here.
+need to handle the 3 cases here.
   - Save
   - Keep Both (action name will be **keepboth**)
   - Replace (action name will be **replace**)
@@ -327,3 +338,456 @@ We can handle the 3 cases here.
 create the **getBlockBlobClient** with the **req.body.filename**.
 If the blob does not exist, then upload the data to that blob.
 If the blob already exists, then create an error message containing "File Already Exists" and send the response.
+
+### Create a new folder
+
+The following table represents the request parameters of *create* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|action|String|create|Name of the file operation.|
+|path|String|-|Relative path in which the folder has to be created.|
+|name|String|-|Name of the folder to be created.|
+|data|FileManagerDirectoryContent|-|Details about the current path (directory).|
+
+*Example for request:*
+
+```ts
+
+   action: "create",
+    data: [
+        {
+            filterPath: "/",
+            hasChild: true,
+            isFile: false,
+            name: "files",
+            nodeId: "fe_tree",
+            size: 0,
+            type: ""
+        }
+    ],
+    name: "Hello",
+    path: "/test/"
+
+```
+
+Check the existence of the folder, If the folder exists then send the error message containing “Folder already exists”.
+If it does not exist, then create the folder.
+Create the folder by creating the file in that folder’s path.
+
+The following table represents the response parameters of *create* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|files|FileManagerDirectoryContent[]|-|Details of the created folder|
+|error|ErrorDetails|-|Error Details|
+
+*Example for response:*
+
+```ts
+{
+    cwd: null,
+    files: [
+        {
+            dateCreated: "2023-09-14T10:52:25.000Z",
+            dateModified: "2023-09-14T10:52:25.000Z",
+            filterPath: null,
+            hasChild: false,
+            isFile: false,
+            name: "New",
+            size: 0,
+            type: "Directory"
+        }
+    ],
+    details: null,
+    error: null
+}
+```
+
+### Rename
+
+The following table represents the request parameters of *rename* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|action|String|rename|Name of the file operation.|
+|path|String|-|Relative path in which the item is located.|
+|name|String|-|Current name of the item to be renamed.|
+|newname|String|-|New name for the item.|
+|data|FileManagerDirectoryContent|-|Details of the item to be renamed.|
+
+*Example for request:*
+
+```ts
+{
+    action: "rename",
+    data: [
+        {
+            dateCreated: "2023-09-14T10:41:17.000Z",
+            filterPath: "/Pictures/Nature/",
+            hasChild: false,
+            iconClass: "e-fe-image",
+            isFile: true,
+            name: "seaviews.jpg",
+            size: 95866,
+            type: ".jpg"
+        }
+    ],
+    newname: "seaview.jpg",
+    name: "seaviews.jpg",
+    path: "/Pictures/Nature/"
+}
+```
+Renaming can be done by copy the folder or file from the source blob instance to target blob instance. If the file exists, then send the error message as response.
+
+The following table represents the response parameters of *rename* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|files|FileManagerDirectoryContent[]|-|Details of the renamed item.|
+|error|ErrorDetails|-|Error Details|
+
+*Example for response:*
+
+```ts
+{
+    cwd:null,
+    files:[
+        {
+            name:"seaview.jpg",
+            size:95866,
+            dateModified:"2023-09-14T11:16:57.000Z",
+            dateCreated:"2023-09-14T10:41:17.000Z",
+            hasChild:false,
+            isFile:true,
+            type:".jpg",
+            filterPath:"/Pictures/Nature/"
+        }
+    ],
+    error:null,
+    details:null
+}
+```
+
+### Delete
+
+The following table represents the request parameters of *delete* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|action|String|delete|Name of the file operation.|
+|path|String|-|Relative path where the items to be deleted are located.|
+|names|String[]|-|List of the items to be deleted.|
+|data|FileManagerDirectoryContent|-|Details of the item to be deleted.|
+
+
+*Example for request:*
+
+```ts
+{
+    action: "delete",
+    path: "/",
+    names: ["bird.jpg"],
+    data: [
+       {
+          dateModified: "2023-09-14T09:12:53.000Z",
+          filterPath: "/",
+          hasChild: false,
+          iconClass: "e-fe-image",
+          isFile: true,
+          name: "bird.jpg",
+          size: 102182,
+          type: ".jpg"
+        }
+    ]
+}
+```
+
+To delete the file, directly get the file instance and delete the file. To delete the folder, we need to get all files inside that folder and delete all those files.
+Handle the null exception if file or folder is not available.
+
+The following table represents the response parameters of *delete* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|files|FileManagerDirectoryContent[]|-|Details about the deleted item(s).|
+|error|ErrorDetails|-|Error Details|
+
+*Example for response:*
+
+```ts
+{
+    cwd: null,
+    details: null,
+    error: null,
+    files: [
+        {
+          dateModified: "2023-09-14T09:12:53.000Z",
+          filterPath: "/",
+          hasChild: false,
+          iconClass: "e-fe-image",
+          isFile: true,
+          name: "bird.jpg",
+          size: 102182,
+          type: ".jpg"
+        }
+    ]
+}
+```
+
+
+
+#### Details
+
+- Under the post method with this url ‘/’ add the following code to call the **getDetails** method.
+
+```ts
+if (typeof req.body !== 'undefined' && req.body.action === 'details') { 
+  await getDetails(req, res);
+}
+
+```
+
+- Need to handle two cases.
+  - Overall details.
+  - File or folder details (single/Multiple)
+- We can separate the Overall details and File or folder details by this condition **"req.body.names.length == 0 && req.body.data != 0)"** 
+
+##### Overall details
+
+- Create the size and **lastUpdated** variables to store the overall blobs size and last date modified.
+- We can get all the blobs from the given path using **listBlobsFlat**  method.
+- Add each blob’s size to the size variable to get the overall size.
+- Set **lastModified** value to the **lastUpdated** variable by comparing the previous one.
+- Create the object and set the required properties and send the response.
+
+### File and folder details
+
+The following table represents the request parameters of *details* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|action|String|details|Name of the file operation.|
+|path|String|-|Relative path where the items are located.|
+|names|String[]|-|List of the items to get details.|
+|data|FileManagerDirectoryContent|-|Details of the selected item.|
+
+*Example:*
+
+```ts
+{
+    action: "details",
+    path: "/FileContents/",
+    names: ["bird.jpg"],
+    data: [
+      {
+        dateModified: "2023-09-14T09:12:53.000Z",
+        filterPath: "/",
+        hasChild: false,
+        iconClass: "e-fe-image",
+        isFile: true,
+        name: "bird.jpg",
+        size: 102182,
+        type: ".jpg"
+      }
+    ]
+}
+```
+
+To get the file and folder details, iterate the **req.body.names** to get the details of files and folders. If the data is file, then get the file instance and get the properties using the **getProperties** method. If the data is Folder, then get the blobs details under that folder using **listBlobsFlat** method. Get the required properties and send final response.
+
+Handled the null exception if the file or folder is not available.
+
+The following table represents the response parameters of *details* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|details|FileManagerDirectoryContent|-|Details of the requested item(s).|
+|error|ErrorDetails|-|Error Details|
+
+
+*Example:*
+
+```ts
+{
+    cwd:null,
+    files:null,
+    error:null,
+    details:
+    {
+      created: "2023-09-15T06:04:12.000Z"
+      isFile: true
+      location: "Files/bird.jpg"
+      modified: "2023-09-15T06:04:12.000Z"
+      multipleFiles: false
+      name: "bird.jpg"
+      size: "100.0 KB"
+    }
+}
+```
+
+### Search
+
+The following table represents the request parameters of *search* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|action|String|search|Name of the file operation.|
+|path|String|-|Relative path to the directory where the files should be searched.|
+|showHiddenItems|Boolean|-|Defines show or hide the hidden items.|
+|caseSensitive|Boolean|-|Defines search is case sensitive or not.|
+|searchString|String|-|String to be searched in the directory.|
+|data|FileManagerDirectoryContent|-|Details of the searched item.|
+
+*Example for request:*
+
+```ts
+{
+    action: "search",
+    path: "/asia/",
+    searchString: "*nature*",
+    showHiddenItems: false,
+    caseSensitive: false,
+    data: [
+      {
+        filterPath: "/",
+        hasChild: true,
+        name: "asia",
+        size: 0,
+        type: "File Folder",
+        _fm_id: "fe_tree_1"
+      }
+    ]
+}
+```
+Replace the '*' in the **req.body.searchString** and assign the result to new variable. Get all blobs under this directory and check that path contains the search string
+
+The following table represents the response parameters of *search* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|cwd|FileManagerDirectoryContent|-|Path (Current Working Directory) details.|
+|files|FileManagerDirectoryContent[]|-|Files and folders in the searched directory that matches the search input.|
+|error|ErrorDetails|-|Error Details|
+
+*Example for response:*
+
+```ts
+{
+    cwd:
+    {
+        name:"asia",
+        size:0,
+        dateModified:"2023-09-14T14:28:27.000Z",
+        dateCreated:"2023-09-14T11:16:57.000Z",
+        hasChild:true,
+        isFile:false,
+        type:"File Folder",
+        filterPath:"/"
+    },
+    files:[
+       0: {
+            dateModified: "2023-09-15T06:22:00.000Z",
+            filterPath: "/asia/",
+            hasChild: false,
+            isFile: true,
+            name: "about.txt",
+            size: 42,
+            type: ".txt"
+          }
+    ],
+    error:null,
+    details:null
+}
+```
+
+
+### Copy and move
+
+he following table represents the request parameters of *copy* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|action|String|copy|Name of the file operation.|
+|path|String|-|Relative path to the directory where the files should be copied.|
+|names|String[] |-|List of files to be copied.|
+|targetPath|String|-|Relative path where the items to be pasted are located.|
+|data|FileManagerDirectoryContent|-|Details of the copied item.|
+|renameFiles|String[]|-|Details of the renamed item.|
+
+*Example for request:*
+
+```ts
+{
+    action: "copy",
+    path: "/",
+    names: ["bird.jpg"],
+    renameFiles: [],
+    targetPath: "/asia/",
+    targetData: {
+      filterPath: "/",
+      hasChild: true,
+      name: "asia",
+      size: 0,
+      type: "File Folder",
+      _fm_id: "fe_tree_1",
+    },
+    data: [
+      0:{
+        dateCreated: "2023-09-15T06:04:12.000Z",
+        dateModified: "2023-09-15T06:04:12.000Z",
+        filterPath: "/",
+        hasChild: false,
+        isFile: true,
+        name: "bird.jpg",
+        size: 102182,
+        type: ".jpg",
+        _fm_created: "September 15, 2023 11:34",
+        _fm_htmlAttr: {class: "e-large-icon", title: "bird.jpg"},
+        _fm_iconClass: "e-fe-image",
+        _fm_imageAttr: {alt: "bird.jpg"},
+        _fm_imageUrl: "http://localhost:3000/GetImage?path=%2Fbird.jpg&time=1694760243307",
+        _fm_modified: "September 15, 2023 11:34",
+      }
+    ]
+}
+```
+action name will be **move** for move action. 
+
+The following table represents the response parameters of *copy* operations.
+
+|Parameter|Type|Default|Explanation|
+|----|----|----|----|
+|cwd|FileManagerDirectoryContent|-|Path (Current Working Directory) details.|
+|files|FileManagerDirectoryContent[]|-|Details of copied files or folders|
+|error|ErrorDetails|-|Error Details|
+
+*Example for response:*
+
+```ts
+{
+    cwd:null,
+    files:[
+      0:{
+          dateCreated: "2023-09-15T06:55:03.000Z"
+          dateModified: "2023-09-15T06:55:03.000Z"
+          filterPath: "/asia/"
+          hasChild: false
+          isFile: true
+          name: "bird.jpg"
+          previousName: null
+          size: 102182
+          type: ".jpg"
+        }
+    ],
+    error:null,
+    details:null
+}
+```
+
+ need to handle two cases.
+  - Directory copy and move.
+  - File copy and move.
+Create the **isRename** variable to store the is request is rename or not. If the **isRename** is false then check the existence of the folders, and if folder is existing, then send the error message. If **isRename** is true, then don’t check the existence of the folder.
+
+To move or copy the folders you need to get all the blobs from that folder and create the new path for each blob and copy the data from the old path to the new path. To move or copy the files copy the data from the source blob client to target client. If the action is move then delete the old blob.
