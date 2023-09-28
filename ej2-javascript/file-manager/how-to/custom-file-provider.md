@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title:  Implement own service provider in ##Platform_Name## File manager control | Syncfusion
 description: Learn here all about implementation own service provider in Syncfusion ##Platform_Name## File manager control of Syncfusion Essential JS 2 and more.
