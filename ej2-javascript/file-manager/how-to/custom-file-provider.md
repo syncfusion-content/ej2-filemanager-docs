@@ -117,6 +117,7 @@ const directoryName = 'Files';
 ```
 
 Create the **app.post** method with URL **'/fileManager'**.
+
 To identify the action by use this condition **req.body.action === 'read'**
 
 The following table represents the request parameters of **read** operations.
@@ -287,8 +288,7 @@ The following table represents the request parameters of *download* operations.
 }
 
 ```
-The **req.body. downloadInput** must be parsed to get the **downloadObj**.
-Download the blob from Azure Blob Storage using the blobClient.
+The **req.body. downloadInput** must be parsed to get the **downloadObj**. Download the blob from Azure Blob Storage using the blobClient.
 
 Download the blob from Azure Blob Storage using the blobClient and Pipe the readableStreamBody to the response object.
 
@@ -329,8 +329,7 @@ The following table represents the request parameters of *Upload* operations.
 
 ```
 
-Multer is a popular middleware used to handle file uploads in Express-based web applications.
-Create the Multer config to store the upload files in buffer.
+Multer is a popular middleware used to handle file uploads in Express-based web applications. Create the Multer config to store the upload files in buffer.
 
 ```ts
 
@@ -346,9 +345,7 @@ need to handle the 3 cases here.
   - Replace (action name will be **replace**)
 
 
-create the **getBlockBlobClient** with the **req.body.filename**.
-If the blob does not exist, then upload the data to that blob.
-If the blob already exists, then create an error message containing "File Already Exists" and send the response.
+create the **getBlockBlobClient** with the **req.body.filename**. If the blob does not exist, then upload the data to that blob. If the blob already exists, then create an error message containing "File Already Exists" and send the response.
 
 ### Create a new folder
 
@@ -382,9 +379,7 @@ The following table represents the request parameters of *create* operations.
 
 ```
 
-Check the existence of the folder, If the folder exists then send the error message containing “Folder already exists”.
-If it does not exist, then create the folder.
-Create the folder by creating the file in that folder’s path.
+Check the existence of the folder, If the folder exists then send the error message containing “Folder already exists”. If it does not exist, then create the folder. Create the folder by creating the file in that folder’s path.
 
 The following table represents the response parameters of *create* operations.
 
@@ -581,9 +576,7 @@ The following table represents the request parameters of *details* operations.
 }
 ```
 
-To get the file and folder details, iterate the **req.body.names** to get the details of files and folders. If the data is file, then get the file instance and get the properties using the **getProperties** method. If the data is Folder, then get the blobs details under that folder using **listBlobsFlat** method. Get the required properties and send final response.
-
-Handled the null exception if the file or folder is not available.
+To get the file and folder details, iterate the **req.body.names** to get the details of files and folders. If the data is file, then get the file instance and get the properties using the **getProperties** method. If the data is Folder, then get the blobs details under that folder using **listBlobsFlat** method. Get the required properties and send final response. Handled the null exception if the file or folder is not available.
 
 The following table represents the response parameters of *details* operations.
 
@@ -776,6 +769,7 @@ The following table represents the response parameters of *copy* operations.
  need to handle two cases.
   - Directory copy and move.
   - File copy and move.
+
 Create the **isRename** variable to store the is request is rename or not. If the **isRename** is false then check the existence of the folders, and if folder is existing, then send the error message. If **isRename** is true, then don’t check the existence of the folder.
 
 To move or copy the folders you need to get all the blobs from that folder and create the new path for each blob and copy the data from the old path to the new path. To move or copy the files copy the data from the source blob client to target client. If the action is move then delete the old blob.
