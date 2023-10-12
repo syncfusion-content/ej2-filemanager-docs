@@ -127,7 +127,7 @@ The following table represents the request parameters of **read** operations.
 |action|String|read|Name of the file operation.|
 |path|String|-|Relative path from which the data has to be read.|
 |showHiddenItems|Boolean|-|Defines show or hide the hidden items.|
-|data|FileManagerDirectoryContent|-|Details about the current path (directory).|
+|data|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details about the current path (directory).|
 
 
 *Example for request:*
@@ -160,11 +160,12 @@ The following table represents the response parameters of **read** operations.
 
 |Parameter|Type|Default|Explanation|
 |----|----|----|----|
-|cwd|FileManagerDirectoryContent|-|Path (Current Working Directory) details.|
+|cwd|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Path (Current Working Directory) details.|
 |files|FileManagerDirectoryContent[]|-|Details of files and folders present in given path or directory.|
-|error|ErrorDetails|-|Error Details|
+|error|[ErrorDetails](../file-operations.md/#delete)|-|Error Details|
 
-The following table represents the contents of **data, cwd, and files** in the file manager request and response.
+<a id="file-manager-directory-content"></a>
+The following table represents the contents of **FileManagerDirectoryContent** in the file manager request and response.
 
 |Parameter|Type|Default|Explanation|Is required|
 |----|----|----|----|----|
@@ -176,20 +177,21 @@ The following table represents the contents of **data, cwd, and files** in the f
 |isFile|Boolean|-|Say whether the item is file or folder.|Yes|
 |size|Number|-|File size|Yes|
 |type|String|-|File extension|Yes|
-|permission |AccessRules|-|File extension|Optional|
+|permission |[AccessRules](#access-rules)|-|File extension|Optional|
 |caseSensitive|Boolean|-|Defines search is case sensitive or not.|Optional|
 |action|String|read|Name of the file operation.|Optional|
 |names|String[]|-|Name list of the items to be downloaded.|Optional|
 |data|FileManagerDirectoryContent|-|Details of the download item.|Optional|
 |uploadFiles|`IList<IFormFile>`|-|File that are uploaded.|Optional|
-|newname|String|-|New name for the item.|Optional|
+|newName|String|-|New name for the item.|Optional|
 |searchString|String|-|String to be searched in the directory.|Optional|
 |targetPath|String|-|Relative path where the items to be pasted are located.|Optional|
 |targetData|FileManagerDirectoryContent|-|Details of the copied item.|Optional|
 |renameFiles|String[]|-|Details of the renamed item.|Optional|
 
 
-The following table represents the AccessRule properties available for file and folder:
+<a id="access-rules"></a>
+The following table represents the **AccessRules** properties available for file and folder:
 
 | **Properties** | **Applicable for file** | **Applicable for folder** | **Description** |
 | --- | --- | --- | --- |
@@ -260,7 +262,7 @@ The following table represents the request parameters of *download* operations.
 |action|String|download|Name of the file operation|
 |path|String|-|Relative path to location where the files to download are present.|
 |names|String[]|-|Name list of the items to be downloaded.|
-|data|FileManagerDirectoryContent|-|Details of the download item.|
+|data|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details of the download item.|
 
 *Example for request:*
 
@@ -339,13 +341,13 @@ const multerConfig = {
 
 ```
 
-need to handle the 3 cases here.
+Need to handle the 3 cases here.
   - Save
   - Keep Both (action name will be **keepboth**)
   - Replace (action name will be **replace**)
 
 
-create the **getBlockBlobClient** with the **req.body.filename**. If the blob does not exist, then upload the data to that blob. If the blob already exists, then create an error message containing "File Already Exists" and send the response.
+Create the **getBlockBlobClient** with the **req.body.filename**. If the blob does not exist, then upload the data to that blob. If the blob already exists, then create an error message containing "File Already Exists" and send the response.
 
 ### Create a new folder
 
@@ -356,7 +358,7 @@ The following table represents the request parameters of *create* operations.
 |action|String|create|Name of the file operation.|
 |path|String|-|Relative path in which the folder has to be created.|
 |name|String|-|Name of the folder to be created.|
-|data|FileManagerDirectoryContent|-|Details about the current path (directory).|
+|data|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details about the current path (directory).|
 
 *Example for request:*
 
@@ -386,7 +388,7 @@ The following table represents the response parameters of *create* operations.
 |Parameter|Type|Default|Explanation|
 |----|----|----|----|
 |files|FileManagerDirectoryContent[]|-|Details of the created folder|
-|error|ErrorDetails|-|Error Details|
+|error|[ErrorDetails](../file-operations.md/#delete)|-|Error Details|
 
 *Example for response:*
 
@@ -419,8 +421,8 @@ The following table represents the request parameters of *rename* operations.
 |action|String|rename|Name of the file operation.|
 |path|String|-|Relative path in which the item is located.|
 |name|String|-|Current name of the item to be renamed.|
-|newname|String|-|New name for the item.|
-|data|FileManagerDirectoryContent|-|Details of the item to be renamed.|
+|newName|String|-|New name for the item.|
+|data|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details of the item to be renamed.|
 
 *Example for request:*
 
@@ -439,7 +441,7 @@ The following table represents the request parameters of *rename* operations.
             type: ".jpg"
         }
     ],
-    newname: "seaview.jpg",
+    newName: "seaview.jpg",
     name: "seaviews.jpg",
     path: "/Pictures/Nature/"
 }
@@ -451,7 +453,7 @@ The following table represents the response parameters of *rename* operations.
 |Parameter|Type|Default|Explanation|
 |----|----|----|----|
 |files|FileManagerDirectoryContent[]|-|Details of the renamed item.|
-|error|ErrorDetails|-|Error Details|
+|error|[ErrorDetails](../file-operations.md/#delete)|-|Error Details|
 
 *Example for response:*
 
@@ -484,7 +486,7 @@ The following table represents the request parameters of *delete* operations.
 |action|String|delete|Name of the file operation.|
 |path|String|-|Relative path where the items to be deleted are located.|
 |names|String[]|-|List of the items to be deleted.|
-|data|FileManagerDirectoryContent|-|Details of the item to be deleted.|
+|data|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details of the item to be deleted.|
 
 
 *Example for request:*
@@ -517,7 +519,7 @@ The following table represents the response parameters of *delete* operations.
 |Parameter|Type|Default|Explanation|
 |----|----|----|----|
 |files|FileManagerDirectoryContent[]|-|Details about the deleted item(s).|
-|error|ErrorDetails|-|Error Details|
+|error|[ErrorDetails](../file-operations.md/#delete)|-|Error Details|
 
 *Example for response:*
 
@@ -552,7 +554,7 @@ The following table represents the request parameters of *details* operations.
 |action|String|details|Name of the file operation.|
 |path|String|-|Relative path where the items are located.|
 |names|String[]|-|List of the items to get details.|
-|data|FileManagerDirectoryContent|-|Details of the selected item.|
+|data|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details of the selected item.|
 
 *Example:*
 
@@ -582,8 +584,8 @@ The following table represents the response parameters of *details* operations.
 
 |Parameter|Type|Default|Explanation|
 |----|----|----|----|
-|details|FileManagerDirectoryContent|-|Details of the requested item(s).|
-|error|ErrorDetails|-|Error Details|
+|details|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details of the requested item(s).|
+|error|[ErrorDetails](../file-operations.md/#delete)|-|Error Details|
 
 
 *Example:*
@@ -617,7 +619,7 @@ The following table represents the request parameters of *search* operations.
 |showHiddenItems|Boolean|-|Defines show or hide the hidden items.|
 |caseSensitive|Boolean|-|Defines search is case sensitive or not.|
 |searchString|String|-|String to be searched in the directory.|
-|data|FileManagerDirectoryContent|-|Details of the searched item.|
+|data|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details of the searched item.|
 
 *Example for request:*
 
@@ -646,9 +648,9 @@ The following table represents the response parameters of *search* operations.
 
 |Parameter|Type|Default|Explanation|
 |----|----|----|----|
-|cwd|FileManagerDirectoryContent|-|Path (Current Working Directory) details.|
+|cwd|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Path (Current Working Directory) details.|
 |files|FileManagerDirectoryContent[]|-|Files and folders in the searched directory that matches the search input.|
-|error|ErrorDetails|-|Error Details|
+|error|[ErrorDetails](../file-operations.md/#delete)|-|Error Details|
 
 *Example for response:*
 
@@ -692,8 +694,8 @@ The following table represents the request parameters of *copy* operations.
 |path|String|-|Relative path to the directory where the files should be copied.|
 |names|String[] |-|List of files to be copied.|
 |targetPath|String|-|Relative path where the items to be pasted are located.|
-|data|FileManagerDirectoryContent|-|Details of the copied item.|
-|targetData|FileManagerDirectoryContent|-|Details of the copied item.|
+|data|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details of the copied item.|
+|targetData|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Details of the copied item.|
 |renameFiles|String[]|-|Details of the renamed item.|
 
 *Example for request:*
@@ -733,15 +735,15 @@ The following table represents the request parameters of *copy* operations.
     ]
 }
 ```
-action name will be **move** for move action. 
+Action name will be **move** for move action. 
 
 The following table represents the response parameters of *copy* operations.
 
 |Parameter|Type|Default|Explanation|
 |----|----|----|----|
-|cwd|FileManagerDirectoryContent|-|Path (Current Working Directory) details.|
+|cwd|[FileManagerDirectoryContent](#file-manager-directory-content)|-|Path (Current Working Directory) details.|
 |files|FileManagerDirectoryContent[]|-|Details of copied files or folders|
-|error|ErrorDetails|-|Error Details|
+|error|[ErrorDetails](../file-operations.md/#delete)|-|Error Details|
 
 *Example for response:*
 
@@ -766,7 +768,7 @@ The following table represents the response parameters of *copy* operations.
 }
 ```
 
- need to handle two cases.
+ Need to handle two cases.
   - Directory copy and move.
   - File copy and move.
 
