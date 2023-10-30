@@ -90,8 +90,6 @@ Import the File Manager and its dependent component styles as given below in the
 {% endhighlight %}
 {% endtabs %}
 
-> You can check out the [themes](https://ej2.syncfusion.com/documentation/appearance/theme/) section to know more about built-in themes and CSS reference for individual controls.
-
 ## Initialize the File Manager
 
 Now, you can start initializing the Essential JS 2 File Manager component in your application. To get started, add a HTML `<div>` element with id attribute value `filemanager` to your `index.html`.
