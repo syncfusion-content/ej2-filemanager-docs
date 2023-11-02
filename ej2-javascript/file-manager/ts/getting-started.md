@@ -11,7 +11,9 @@ domainurl: ##DomainURL##
 
 # Getting started in ##Platform_Name## File manager control
 
-This section briefly explains how to create File Manager component and configure its available functionalities in TypeScript, using Essential JS 2 quickstart seed repository.
+This section briefly explains how to create File Manager component and configure its available functionalities in TypeScript, using Essential JS 2 [quickstart](https://github.com/SyncfusionExamples/ej2-quickstart-webpack-) seed repository.
+
+> This application is integrated with the `webpack.config.js` configuration and uses the latest version of the [webpack-cli](https://webpack.js.org/api/cli/#commands). It requires node `v14.15.0` or higher. For more information about webpack and its features, refer to the [webpack documentation](https://webpack.js.org/guides/getting-started/).
 
 ## Dependencies
 
@@ -31,66 +33,49 @@ The following are the dependencies required to use the File Manager component in
     |-- @syncfusion/ej2-grids
 ```
 
-## Set up your development environment
+## Set up development environment
 
-To get started with the File Manager component, you have to clone the Essential JS 2 [`quickstart`](https://github.com/syncfusion/ej2-quickstart) project and install the npm packages by using the following commands.
+Open the command prompt from the required directory, and run the following command to clone the Syncfusion JavaScript (Essential JS 2) quickstart project from [GitHub](https://github.com/SyncfusionExamples/ej2-quickstart-webpack-).
 
-```
-git clone https://github.com/syncfusion/ej2-quickstart.git quickstart
-cd quickstart
+{% tabs %}
+{% highlight bash tabtitle="CMD" %}
+
+git clone https://github.com/SyncfusionExamples/ej2-quickstart-webpack- ej2-quickstart
+
+{% endhighlight %}
+{% endtabs %}
+
+After cloning the application in the `ej2-quickstart` folder, run the following command line to navigate to the `ej2-quickstart` folder.
+
+{% tabs %}
+{% highlight bash tabtitle="CMD" %}
+
+cd ej2-quickstart
+
+{% endhighlight %}
+{% endtabs %}
+
+## Add Syncfusion JavaScript packages
+
+Syncfusion JavaScript (Essential JS 2) packages are available on the [npmjs.com](https://www.npmjs.com/~syncfusionorg) public registry. You can install all Syncfusion JavaScript (Essential JS 2) controls in a single [@syncfusion/ej2](https://www.npmjs.com/package/@syncfusion/ej2) package or individual packages for each control.
+
+The quickstart application is preconfigured with the dependent [@syncfusion/ej2](https://www.npmjs.com/package/@syncfusion/ej2) package in the `~/package.json` file. Use the following command to install the dependent npm packages from the command prompt.
+
+{% tabs %}
+{% highlight bash tabtitle="NPM" %}
+
 npm install
-```
 
->The [project](https://github.com/syncfusion/ej2-quickstart) is preconfigured with common settings (`src/styles/styles.css`, `system.config.js` ) to start all the Essential JS 2 components.
+{% endhighlight %}
+{% endtabs %}
 
-## Configuring system JS
+## Import the Syncfusion CSS styles
 
-Refer the [File Manager component dependencies](#dependencies) in the `system.config.js` configuration file.
+Import the File Manager and its dependent component styles as given below in the `~/src/styles/styles.css` file, as shown below: 
 
-```javascript
-System.config({
-    paths: {
-        'npm:': './node_modules/',
-        'syncfusion:': 'npm:@syncfusion/'
-    },
-    map: {
-        app: 'app',
+{% tabs %}
+{% highlight css tabtitle="style.css" %}
 
-        //Syncfusion required source packages mapping for File Manager component
-
-        "@syncfusion/ej2-base": "syncfusion:ej2-base/dist/ej2-base.umd.min.js",
-        "@syncfusion/ej2-data": "syncfusion:ej2-data/dist/ej2-data.umd.min.js",
-        "@syncfusion/ej2-inputs": "syncfusion:ej2-inputs/dist/ej2-inputs.umd.min.js",
-        "@syncfusion/ej2-buttons": "syncfusion:ej2-buttons/dist/ej2-buttons.umd.min.js",
-        "@syncfusion/ej2-splitbuttons": "syncfusion:ej2-splitbuttons/dist/ej2-splitbuttons.umd.min.js",
-        "@syncfusion/ej2-lists": "syncfusion:ej2-lists/dist/ej2-lists.umd.min.js",
-        "@syncfusion/ej2-navigations": "syncfusion:ej2-navigations/dist/ej2-navigations.umd.min.js",
-        "@syncfusion/ej2-popups": "syncfusion:ej2-popups/dist/ej2-popups.umd.min.js",
-        "@syncfusion/ej2-calendars": "syncfusion:ej2-calendars/dist/ej2-calendars.umd.min.js",
-        "@syncfusion/ej2-grids": "syncfusion:ej2-grids/dist/ej2-grids.umd.min.js",
-        "@syncfusion/ej2-filemanager": "syncfusion:ej2-filemanager/dist/ej2-filemanager.umd.min.js",
-        "@syncfusion/ej2-dropdowns": "syncfusion:ej2-dropdowns/dist/ej2-dropdowns.umd.min.js",
-        "@syncfusion/ej2-excel-export": "syncfusion:ej2-excel-export/dist/ej2-excel-export.umd.min.js",
-        "@syncfusion/ej2-pdf-export": "syncfusion:ej2-pdf-export/dist/ej2-pdf-export.umd.min.js",
-        "@syncfusion/ej2-compression": "syncfusion:ej2-compression/dist/ej2-compression.umd.min.js",
-        "@syncfusion/ej2-file-utils": "syncfusion:ej2-file-utils/dist/ej2-file-utils.umd.min.js",
-        "@syncfusion/ej2-layouts": "syncfusion:ej2-layouts/dist/ej2-layouts.umd.min.js"
-    },
-    packages: {
-        'app': { main: 'app', defaultExtension: 'js' }
-    }
-});
-
-System.import('app');
-
-```
-
-## Adding Style sheet to the Application
-
-Import the File Manager and its dependent component styles as given below in `style.css`.
-
-```
-/* refer the styles from package folder */
 @import '../../node_modules/@syncfusion/ej2-base/styles/material.css';
 @import '../../node_modules/@syncfusion/ej2-icons/styles/material.css';
 @import '../../node_modules/@syncfusion/ej2-inputs/styles/material.css';
@@ -101,15 +86,17 @@ Import the File Manager and its dependent component styles as given below in `st
 @import '../../node_modules/@syncfusion/ej2-layouts/styles/material.css';
 @import '../../node_modules/@syncfusion/ej2-grids/styles/material.css';
 @import '../../node_modules/@syncfusion/ej2-filemanager/styles/material.css';
-```
 
->Note: If you want to refer the combined component styles, please make use of our [CRG](https://crg.syncfusion.com/) (Custom Resource Generator) in your application.
+{% endhighlight %}
+{% endtabs %}
 
 ## Initialize the File Manager
 
 Now, you can start initializing the Essential JS 2 File Manager component in your application. To get started, add a HTML `<div>` element with id attribute value `filemanager` to your `index.html`.
 
-```html
+{% tabs %}
+{% highlight html tabtitle="index.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -120,13 +107,6 @@ Now, you can start initializing the Essential JS 2 File Manager component in you
     <meta name="description" content="Essential JS 2" />
     <meta name="author" content="Syncfusion" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!--style reference from app-->
-    <link href="/styles/styles.css" rel="stylesheet" />
-
-    <!--system js reference and configuration-->
-    <script src="node_modules/systemjs/dist/system.src.js" type="text/javascript"></script>
-    <script src="system.config.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -135,11 +115,15 @@ Now, you can start initializing the Essential JS 2 File Manager component in you
 </body>
 
 </html>
-```
+
+{% endhighlight %}
+{% endtabs %}
 
 Now, import the File Manager component to your `app.ts` and append to `#filemanager` as follows.
 
-```ts
+{% tabs %}
+{% highlight ts tabtitle="app.ts" %}
+
 import { FileManager } from '@syncfusion/ej2-filemanager';
 
 let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
@@ -152,7 +136,9 @@ let filemanagerInstance: FileManager = new FileManager({
 
 // render initialized File Manager
 filemanagerInstance.appendTo('#filemanager');
-```
+
+{% endhighlight %}
+{% endtabs %}
 
 >**Note:** The [ajaxSettings](../api/file-manager/#ajaxsettings) must be defined while initializing the file manager. File manager utilizes the URL's mentioned in ajaxSettings to send [file operation](./file-operations) request to the server.
 >The File Manager service link is given in `hostUrl`.
@@ -161,9 +147,13 @@ filemanagerInstance.appendTo('#filemanager');
 
 Now use the `npm run start` command to run the application in the browser.
 
-```
+{% tabs %}
+{% highlight bash tabtitle="NPM" %}
+
 npm run start
-```
+
+{% endhighlight %}
+{% endtabs %}
 
 The following example shows the basic File Manager component.
 
@@ -179,7 +169,9 @@ The following example shows the basic File Manager component.
 
 To perform the download operation, initialize the `downloadUrl` property in a [ajaxSettings](../api/file-manager/#ajaxsettings) of File Manager component.
 
-```ts
+{% tabs %}
+{% highlight ts tabtitle="app.ts" %}
+
 import { FileManager } from '@syncfusion/ej2-filemanager';
 
 let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
@@ -193,13 +185,17 @@ let filemanagerInstance: FileManager = new FileManager({
 
 // render initialized File Manager
 filemanagerInstance.appendTo('#filemanager');
-```
+
+{% endhighlight %}
+{% endtabs %}
 
 ## File Upload support
 
 To perform the upload operation, initialize the `uploadUrl` property in a [ajaxSettings](../api/file-manager/#ajaxsettings) of File Manager Component.
 
-```ts
+{% tabs %}
+{% highlight ts tabtitle="app.ts" %}
+
 import { FileManager } from '@syncfusion/ej2-filemanager';
 
 let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
@@ -213,7 +209,9 @@ let filemanagerInstance: FileManager = new FileManager({
 
 // render initialized File Manager
 filemanagerInstance.appendTo('#filemanager');
-```
+
+{% endhighlight %}
+{% endtabs %}
 
 ## Image Preview support
 
@@ -234,7 +232,9 @@ To perform the image preview support in the File Manager component, need to init
 
 Basically, the file manager component contains a context menu for performing file operations, large-icons view for displaying the files and folders, and a breadcrumb for navigation. However, these basic functionalities can be extended by using the additional feature modules like toolbar, navigation pane, and details view to simplify the navigation and file operations within the file system. The above modules can be injected using the `FileManager.Inject()` method.
 
-```ts
+{% tabs %}
+{% highlight ts tabtitle="app.ts" %}
+
 import { FileManager, Toolbar, NavigationPane, DetailsView } from '@syncfusion/ej2-filemanager';
 
 FileManager.Inject(Toolbar, NavigationPane, DetailsView)
@@ -251,7 +251,9 @@ let filemanagerInstance: FileManager = new FileManager({
 });
 // render initialized FileManager
 filemanagerInstance.appendTo('#filemanager');
-```
+
+{% endhighlight %}
+{% endtabs %}
 
 The following example shows you the File Manager with all feature modules.
 
@@ -327,7 +329,9 @@ The current path of the File Manager can be specified initially or dynamically u
 
 The following code snippet demonstrates specifying the current path in File Manager on rendering.
 
-```ts
+{% tabs %}
+{% highlight ts tabtitle="app.ts" %}
+
 import { FileManager, Toolbar, NavigationPane, DetailsView } from '@syncfusion/ej2-filemanager';
 
 FileManager.Inject(Toolbar, NavigationPane, DetailsView)
@@ -347,4 +351,6 @@ let filemanagerInstance: FileManager = new FileManager({
 
 // render initialized File Manager
 filemanagerInstance.appendTo('#filemanager');
-```
+
+{% endhighlight %}
+{% endtabs %}
