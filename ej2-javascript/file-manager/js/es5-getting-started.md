@@ -23,38 +23,28 @@ Using either of the following way to refer the required script and styles.
 
 ### Using local script and style references in a HTML page
 
-**Step 1:** You can get the global scripts and styles from the [Essential Studio JavaScript (Essential JS 2)](https://www.syncfusion.com/downloads/essential-js2/confirm) build installed location.
+**Step 1:** Create an app folder `myapp` for Essential JS 2 JavaScript controls.
 
-**Step 2:** To render file manager component, need to add file manager and its dependent packages from below installed location.
-
-#### Dependencies
-
-* ej2-base
-* ej2-layouts
-* ej2-popups
-* ej2-data
-* ej2-inputs
-* ej2-lists
-* ej2-buttons
-* ej2-splitbuttons
-* ej2-navigations
-* ej2-grids
-* ej2-filemanager
+**Step 2:** You can get the global scripts and styles from the [Essential Studio JavaScript (Essential JS 2)](https://www.syncfusion.com/downloads/essential-js2) build installed location.
 
 **Syntax:**
-
-> package: `**(installed location)**\Syncfusion\Essential Studio\JavaScript - EJ2\{RELEASE_VERSION}\Web (Essential JS 2)\JavaScript\{PACKAGE_NAME}`
+> Script: `**(installed location)**\Syncfusion\Essential Studio\JavaScript - EJ2\{RELEASE_VERSION}\Web (Essential JS 2)\JavaScript\{PACKAGE_NAME}\dist\global\{PACKAGE_NAME}.min.js`
+>
+> Styles: `**(installed location)**\Syncfusion\Essential Studio\JavaScript - EJ2\{RELEASE_VERSION}\Web (Essential JS 2)\JavaScript\{PACKAGE_NAME}\styles\material.css`
 
 **Example:**
 
-> Package: `C:\Program Files (x86)\Syncfusion\Essential Studio\JavaScript - EJ2\17.1.0.36\Web (Essential JS 2)\JavaScript\ej2-base`
+> Script: `C:\Program Files (x86)\Syncfusion\Essential Studio\JavaScript - EJ2\16.3.0.17\Web (Essential JS 2)\JavaScript\ej2-filemanager\dist\global\ej2-filemanager.min.js`
 >
-> packages: `C:\Program Files (x86)\Syncfusion\Essential Studio\JavaScript - EJ2\17.1.0.36\Web (Essential JS 2)\JavaScript\ej2-inputs`
->
-> Package: `C:\Program Files (x86)\Syncfusion\Essential Studio\JavaScript - EJ2\17.1.0.36\Web (Essential JS 2)\JavaScript\ej2-filemanager`
->
+> Styles: `C:\Program Files (x86)\Syncfusion\Essential Studio\JavaScript - EJ2\16.3.0.17\Web (Essential JS 2)\JavaScript\ej2-filemanager\styles\material.css`
 
-**Step 3:** Create a folder `myapp/resources` and copy/paste the above mentioned packages from the above installed location to `myapp/resources` location.
+The below located script and style file contains all Syncfusion JavaScript (ES5) UI control resources in a single file.
+
+> Scripts: `**(installed location)**\Syncfusion\Essential Studio\JavaScript - EJ2\{RELEASE_VERSION}\Web (Essential JS 2)\JavaScript\ej2\dist\ej2.min.js`
+>
+> Styles: `**(installed location)**\Syncfusion\Essential Studio\JavaScript - EJ2\{RELEASE_VERSION}\Web (Essential JS 2)\JavaScript\ej2\material.css`
+
+**Step 3:** Create a folder `myapp/resources` and copy/paste the global scripts and styles from the above installed location to `myapp/resources` location.
 
 **Step 4:** Create a HTML page (index.html) in `myapp` location and add the Essentials JS 2 script and style references.
 
