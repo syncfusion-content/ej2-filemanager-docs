@@ -4,10 +4,10 @@ ej.filemanager.FileManager.Inject(ej.filemanager.DetailsView,ej.filemanager.Tool
 // initialize File Manager component
 var filemanagerInstance = new ej.filemanager.FileManager({
     ajaxSettings: {
-        url: hostUrl + 'api/FileManager/FileOperations',
-        getImageUrl: hostUrl + 'api/FileManager/GetImage',
-        uploadUrl: hostUrl + 'api/FileManager/Upload',
-        downloadUrl: hostUrl + 'api/FileManager/Download'
+        url: hostUrl + 'api/NaturalSorting/FileOperations',
+        getImageUrl: hostUrl + 'api/NaturalSorting/GetImage',
+        uploadUrl: hostUrl + 'api/NaturalSorting/Upload',
+        downloadUrl: hostUrl + 'api/NaturalSorting/Download'
     },
     sortComparer: ej.filemanager.sortComparer,
     detailsViewSettings: {
