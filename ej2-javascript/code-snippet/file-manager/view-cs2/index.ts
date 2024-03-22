@@ -2,7 +2,7 @@
 
 import { FileManager, Toolbar, NavigationPane } from '@syncfusion/ej2-filemanager';
 
-FileManager.Inject(Toolbar, NavigationPane)
+FileManager.Inject(Toolbar, NavigationPane, DetailsView)
 
 let hostUrl: string = 'https://ej2-aspcore-service.azurewebsites.net/';
 // initialize File Manager component
