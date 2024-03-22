@@ -1,6 +1,6 @@
 var hostUrl = 'https://ej2-aspcore-service.azurewebsites.net/';
 // inject feature modules of the file manager
-ej.filemanager.FileManager.Inject(ej.filemanager.Toolbar,ej.filemanager.NavigationPane);
+ej.filemanager.FileManager.Inject(ej.filemanager.DetailsView,ej.filemanager.Toolbar,ej.filemanager.NavigationPane);
 // initialize File Manager component
 var filemanagerInstance = new ej.filemanager.FileManager({
     ajaxSettings: {
